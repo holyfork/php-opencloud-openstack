@@ -8,7 +8,7 @@ use GuzzleHttp\Client;
 use OpenStack\Common\Service\Builder;
 use OpenStack\Common\Transport\HandlerStackFactory;
 use OpenStack\Common\Transport\Utils;
-use OpenStack\Identity\v3\Service;
+use OpenStack\Identity\v1\Service;
 
 /**
  * This class is the primary entry point for working with the SDK. It allows for the easy creation
