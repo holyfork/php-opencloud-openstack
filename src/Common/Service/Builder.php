@@ -33,6 +33,8 @@ class Builder
      */
     private $defaults = ['urlType' => 'publicURL'];
 
+    private ClientInterface|null $client = null;
+
     /**
      * @param array  $globalOptions options that will be applied to every service created by this builder.
      *                              Eventually they will be merged (and if necessary overridden) by the
@@ -93,7 +95,11 @@ class Builder
             $stack        = HandlerStackFactory::createWithOptions(array_merge($options, ['token' => $token]));
             $microVersion = $options['microVersion'] ?? null;
 
-            $options['httpClient'] = $this->httpClient($baseUrl, $stack, $options['catalogType'], $microVersion);
+            if ($this->client === null) {
+                $this->client = $this->httpClient($baseUrl, $stack, $options['catalogType'], $microVersion);
+            }
+
+            $options['httpClient'] = $this->client;
         }
     }
 
